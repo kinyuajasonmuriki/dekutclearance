@@ -1,0 +1,31 @@
+#nav-collapse-top{
+    background-color: #757171;
+}
+#map{
+    width: 96%;
+    height: 436px;
+    border: 1px red dotted;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.service-desc{
+    text-align: left;
+}
+
+.service-icon i {
+    font-size: 60px;
+    z-index: 20;
+    left: 22px;
+}
+.service-icon i.fa-warning{
+    color: #FC7C05;
+}
+.service-icon i.fa-signal{
+    color: #1BBBFA;
+}
+.service-icon i.fa-gear{
+    color: #0815CC;
+}
+.service-icon i.fa-trophy{
+    color: #28F00E;
+}
