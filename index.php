@@ -9,11 +9,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta nam="keywords" content="Network Utilities, Utility Monitor, GIS, Remote Sensing, Geography, Optical Fibre Cables, Benjamin Mbithi Kiio, Jason Muriki Kinyua" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="libs/leaflet/leaflet.css" rel="stylesheet" type="text/css" />
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="css/animate.css" rel="stylesheet" />
 <link href="css/style.css" rel="stylesheet">
 <link href="color/default.css" rel="stylesheet">
 <link href="css/conflicts.css" rel="stylesheet">
+<link href="libs/markers/markers.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -53,9 +55,12 @@ require_once('contact.php');
     <script src="js/jquery.easing.min.js"></script>	
 	<script src="js/jquery.scrollTo.js"></script>
 	<script src="js/wow.min.js"></script>
-    <script src="js/custom.js"></script>
-	<script src="js/map.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC5oGUwT09nELrlGwrYOwJQj68yvSzUHGs&callback=connectMap"></script>
+	<script src="js/controller.js"></script>
+	<script src="libs/leaflet/leaflet-src.js" ></script>
+	<script src="libs/markers/markers.js"></script>
+	<script src="libs/markers/PruneCluster.js"></script>
+	<script src="js/custom.js"></script>
+	
 </body>
 
 </html>
