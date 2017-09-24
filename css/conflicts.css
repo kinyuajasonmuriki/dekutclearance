@@ -1,14 +1,16 @@
-#nav-collapse-top{
+#nav-collapse-top {
     background-color: #757171;
 }
-#map{
+
+#map {
     width: 96%;
     height: 436px;
     border: 1px red dotted;
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.service-desc{
+
+.service-desc {
     text-align: left;
 }
 
@@ -17,15 +19,49 @@
     z-index: 20;
     left: 22px;
 }
-.service-icon i.fa-warning{
+
+.service-icon i.fa-warning {
     color: #FC7C05;
 }
-.service-icon i.fa-signal{
+
+.service-icon i.fa-signal {
     color: #1BBBFA;
 }
-.service-icon i.fa-gear{
+
+.service-icon i.fa-gear {
     color: #0815CC;
 }
-.service-icon i.fa-trophy{
+
+.service-icon i.fa-trophy {
     color: #28F00E;
+}
+
+.autocomplete-suggestions {
+    border: 1px solid #999;
+    background: #FFF;
+    overflow: auto;
+}
+
+.autocomplete-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.autocomplete-selected {
+    background: #F0F0F0;
+}
+
+.autocomplete-suggestions strong {
+    font-weight: normal;
+    color: #3399FF;
+}
+
+.autocomplete-group {
+    padding: 2px 5px;
+}
+
+.autocomplete-group strong {
+    display: block;
+    border-bottom: 1px solid #000;
 }

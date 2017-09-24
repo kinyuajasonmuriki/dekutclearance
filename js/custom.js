@@ -1,4 +1,4 @@
-var poi = { lat: -1.26808, lng: 36.81204 },
+var poi = [-1.26808, 36.81204],
 fibreLayers = ["buildings-connected.geojson", "slack-manhole.geojson", "closure-manhole.geojson", "optical-fibre.geojson",  "westlands.geojson"],
 layersDict = ["Connected Buildings", "Slack Manhole", "Closure Manhole",  "Fibre Optics network", "Westlands Boundary"],
 homeIcon = L.ExtraMarkers.icon({
@@ -144,6 +144,31 @@ utilityCluster.PrepareLeafletMarker = function (marker, data, category) {
 		marker.bindPopup(data.popup);
 	}
 };
+
+var basemaps = [
+	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 23,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		label: "OSM Tile"
+	}),
+	L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+		maxZoom: 17,
+		attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+		label: "OSM TOPO"
+	}),
+	 L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+		label: "ESRI WorldTopo",
+		maxZoom: 25
+	}),
+	L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+		label: "ESRI WorldImage",
+		maxZoom: 25
+	})
+];
+
+
 
 (function ($) {
 
