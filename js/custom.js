@@ -13,13 +13,20 @@ slackIcon = L.ExtraMarkers.icon({
 	extraClasses: 'fa-spin',
 	iconColor: 'black',
 	markerColor: 'orange-dark',
-	shape: 'penta',
+	shape: 'circle',
 	prefix: 'fa'
 }),
 closureIcon = L.ExtraMarkers.icon({
 	icon: 'fa-crosshairs',
 	iconColor: 'white',
 	markerColor: 'green',
+	shape: 'circle',
+	prefix: 'fa'
+}),
+geolocateIcon = L.ExtraMarkers.icon({
+	icon: 'fa-user',
+	iconColor: 'cyan',
+	markerColor: 'orange',
 	shape: 'penta',
 	prefix: 'fa'
 }),

@@ -16,16 +16,8 @@ function initializeUtilityMap(mapLayers) {
     markerZoomAnimation: true,
     fadeAnimation: true
   };
-  var mapKey = 'pk.eyJ1IjoiamFzb25tdXJ5IiwiYSI6ImNqMThheW03ODAwNW0zMnBlb3JscTEzenUifQ.3wXebm5J1BrrVLPVgZ5U2g';
-  L.mapbox.accessToken = mapKey;
-  mapboxgl.accessToken = mapKey;
-  var map = new mapboxgl.Map({
-    container: 'map',
-    zoom: 13,
-    center: poi,
-    style: 'mapbox://styles/mapbox/satellite-v9',
-    hash: false
-  });
+  L.mapbox.accessToken = 'pk.eyJ1IjoiamFzb25tdXJ5IiwiYSI6ImNqMThheW03ODAwNW0zMnBlb3JscTEzenUifQ.3wXebm5J1BrrVLPVgZ5U2g';
+  var map = L.mapbox.map('map', 'mapbox.satellite').setView(poi, 14);
 
   $.each(fibreLayers, function (key, val) {
     $.getJSON("data/" + fibreLayers[key], function (data) {
@@ -51,22 +43,13 @@ function constructMapControls(map){
 
   L.control.custom({
     position: 'topright',
-    content: '<button type="button" class="btn btn-default">' +
+    content: '<button type="button" class="btn btn-default" title="Geolocate" value="geolocate">' +
     '    <i class="fa fa-crosshairs"></i>' +
     '</button>' +
-    '<button type="button" class="btn btn-info">' +
-    '    <i class="fa fa-compass"></i>' +
+    '<button type="button" class="btn btn-info" title="Connect New Building" value="connect">' +
+    '    <i class="fa fa-home"></i>' +
     '</button>' +
-    '<button type="button" class="btn btn-primary">' +
-    '    <i class="fa fa-spinner fa-pulse fa-fw"></i>' +
-    '</button>' +
-    '<button type="button" class="btn btn-danger">' +
-    '    <i class="fa fa-times"></i>' +
-    '</button>' +
-    '<button type="button" class="btn btn-success">' +
-    '    <i class="fa fa-check"></i>' +
-    '</button>' +
-    '<button type="button" class="btn btn-warning">' +
+    '<button type="button" class="btn btn-warning" title="Troubleshoot Connection" value="maintain">' +
     '    <i class="fa fa-exclamation-triangle"></i>' +
     '</button>',
     classes: 'btn-group-vertical btn-group-sm',
@@ -83,9 +66,15 @@ function constructMapControls(map){
     events:
     {
       click: function (data) {
-        console.log('wrapper div element clicked');
-        console.log(data);
+        if (data.target.value == "connect"){
+          connectNewBuilding(map);
+        } else if (data.target.value == "maintain"){
+          troubleshootConnection(map);
+        } else if (data.target.value == "geolocate"){
+          getCurrentUserLocation(map);
+        }
       },
+      /*
       dblclick: function (data) {
         console.log('wrapper div element dblclicked');
         console.log(data);
@@ -93,7 +82,7 @@ function constructMapControls(map){
       contextmenu: function (data) {
         console.log('wrapper div element contextmenu');
         console.log(data);
-      },
+      }, */
     }
   }).addTo(map);
 
@@ -203,6 +192,35 @@ function loadVectorComplex(data, map, key) {
     map.setMaxBounds(vectorLayer.getBounds());
     map.options.minZoom = map.getZoom();
   }
+}
+
+function getCurrentUserLocation(map){
+  /*map.on('accuratepositionprogress', function(e){
+    console.log("Progress", e.accuracy);
+    console.log("Progress", e.latlng);
+  }); */
+  map.on('accuratepositionfound', function(e){
+    //console.log("Accurate", e.accuracy);
+    var userLocation = L.marker(e.latlng, { icon: geolocateIcon, }).addTo(map);
+    map.setView(e.latlng, 25);
+    userLocation.bindPopup("<i>latlng:"+e.latlng+" </i>").openOn(map);
+  });
+  map.on('accuratepositionerror', function(e){
+    bootbox.alert(e.message);
+  });
+  map.findAccuratePosition({
+    maxWait: 15000, 
+    desiredAccuracy: 30 
+  });
+}
+
+function troubleshootConnection(map){
+
+}
+
+function connectNewBuilding(map){
+
+
 }
 
 

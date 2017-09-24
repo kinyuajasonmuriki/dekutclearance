@@ -9,9 +9,7 @@
 <meta name="description" content="GIS Based Utility Monitoring System For Optic Fibre Cables" >
 <meta nam="keywords" content="Network Utilities, Utility Monitor, GIS, Remote Sensing, Geography, Optical Fibre Cables, Benjamin Mbithi Kiio, Jason Muriki Kinyua" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="libs/leaflet/leaflet.css" rel="stylesheet" type="text/css" />
-<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.css' rel='stylesheet' />
+<link href='libs/mapbox.css' rel='stylesheet' />
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="css/animate.css" rel="stylesheet" />
 <link href="css/style.css" rel="stylesheet">
@@ -54,19 +52,19 @@ require_once('contact.php');
 
 
     <script src="js/jquery.min.js"></script>
-	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.autocomplete.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>	
 	<script src="js/jquery.scrollTo.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script src="js/controller.js"></script>
-	<script src="libs/leaflet/leaflet-src.js"></script>
-	<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
-	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.js'></script>
+	<script src="libs/mapbox.js"></script>
 	<script src="libs/markers/markers.js"></script>
 	<script src="libs/markers/PruneCluster.js"></script>
 	<script src="libs/L.Control.Basemaps-min.js"></script>
 	<script src="libs/Leaflet.Control.Custom.js"></script>
+	<script src="libs/Leaflet.AccuratePosition.js"></script>
+	<script src="js/bootbox.js"></script>
 	<script src="js/custom.js"></script>
 	
 </body>
