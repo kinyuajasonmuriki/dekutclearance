@@ -10,6 +10,7 @@
 <meta nam="keywords" content="Network Utilities, Utility Monitor, GIS, Remote Sensing, Geography, Optical Fibre Cables, Benjamin Mbithi Kiio, Jason Muriki Kinyua" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href='libs/mapbox.css' rel='stylesheet' />
+<link href='libs/mapbox.directions.css' rel='stylesheet' />
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="css/animate.css" rel="stylesheet" />
 <link href="css/style.css" rel="stylesheet">
@@ -17,6 +18,7 @@
 <link href="css/conflicts.css" rel="stylesheet">
 <link href="libs/markers/markers.css" rel="stylesheet" type="text/css" />
 <link href="libs/L.Control.Basemaps.css" rel="stylesheet" type="text/css" />
+<link href="css/zoomControl.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -58,12 +60,16 @@ require_once('contact.php');
 	<script src="js/jquery.scrollTo.js"></script>
 	<script src="js/wow.min.js"></script>
 	<script src="js/controller.js"></script>
+	<script src="libs/leaflet/leaflet-src.js"></script>
 	<script src="libs/mapbox.js"></script>
 	<script src="libs/markers/markers.js"></script>
 	<script src="libs/markers/PruneCluster.js"></script>
 	<script src="libs/L.Control.Basemaps-min.js"></script>
 	<script src="libs/Leaflet.Control.Custom.js"></script>
 	<script src="libs/Leaflet.AccuratePosition.js"></script>
+	<script src="libs/zoomControl.js"></script>
+	<script src="libs/mapbox.directions.js"></script>
+	<script src="libs/leaflet.hash.js"></script>
 	<script src="js/bootbox.js"></script>
 	<script src="js/custom.js"></script>
 	

@@ -65,3 +65,79 @@
     display: block;
     border-bottom: 1px solid #000;
 }
+
+#inputs,
+#errors,
+#directions {
+    position: relative;
+    width: 33.3333%;
+    max-width: 300px;
+    min-width: 200px;
+}
+
+#inputs {
+    z-index: 2;
+}
+
+#directions {
+    z-index: 1;
+    background: rgba(0, 0, 0, .8);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    -webkit-transition: -webkit-transform .15s;
+    -moz-transition: -moz-transform .15s;
+    -o-transition: -o-transform .15s;
+    transition: transform .15s;
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+#directions.active {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%);
+}
+
+#directions::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-left: 0;
+    background: none;
+}
+
+#errors {
+    z-index: 8;
+    opacity: 0;
+    padding: 10px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, .25);
+    top: 130px;
+    left: 10px;
+    -webkit-transition: all .15s;
+    -moz-transition: all .15s;
+    -o-transition: all .15s;
+    transition: all .15s;
+}
+
+#errors.mapbox-error-active {
+    opacity: 1;
+}
+
+#directions::-webkit-scrollbar-track {
+    background: none;
+}
+
+#directions::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, .1);
+    border-radius: 0;
+}
+
+#instructions::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, .2);
+    cursor: pointer;
+}

@@ -212,7 +212,10 @@
 }
 
 .leaflet-top .leaflet-control {
-    margin-top: 10px
+    margin-top: 10px;
+    margin-right: 0px !important;
+    max-height: 260px !important;
+    overflow: scroll;
 }
 
 .leaflet-bottom .leaflet-control {

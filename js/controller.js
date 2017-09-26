@@ -14,11 +14,14 @@ function initializeUtilityMap(mapLayers) {
     bounceAtZoomLimits: true,
     attributionControl: true,
     markerZoomAnimation: true,
-    fadeAnimation: true
+    fadeAnimation: true,
+    zoomControl: false
   };
   L.mapbox.accessToken = 'pk.eyJ1IjoiamFzb25tdXJ5IiwiYSI6ImNqMThheW03ODAwNW0zMnBlb3JscTEzenUifQ.3wXebm5J1BrrVLPVgZ5U2g';
-  var map = L.mapbox.map('map', 'mapbox.satellite').setView(poi, 14);
 
+  var map = L.mapbox.map('map', 'mapbox.satellite', { zoomControl: false}).setView(poi, 14);
+ 
+  L.control.zoomslider().addTo(map);
   $.each(fibreLayers, function (key, val) {
     $.getJSON("data/" + fibreLayers[key], function (data) {
       if (key >= 0 && key <= 2) {
@@ -31,6 +34,7 @@ function initializeUtilityMap(mapLayers) {
   });
  
  constructMapControls(map);
+ 
 }
 
 function constructMapControls(map){
@@ -47,10 +51,7 @@ function constructMapControls(map){
     '    <i class="fa fa-crosshairs"></i>' +
     '</button>' +
     '<button type="button" class="btn btn-info" title="Connect New Building" value="connect">' +
-    '    <i class="fa fa-home"></i>' +
-    '</button>' +
-    '<button type="button" class="btn btn-warning" title="Troubleshoot Connection" value="maintain">' +
-    '    <i class="fa fa-exclamation-triangle"></i>' +
+    '    <i class="fa fa-road" aria-hidden="true"></i>' +
     '</button>',
     classes: 'btn-group-vertical btn-group-sm',
     style:
@@ -68,9 +69,8 @@ function constructMapControls(map){
       click: function (data) {
         if (data.target.value == "connect"){
           connectNewBuilding(map);
-        } else if (data.target.value == "maintain"){
-          troubleshootConnection(map);
-        } else if (data.target.value == "geolocate"){
+        }
+         else if (data.target.value == "geolocate"){
           getCurrentUserLocation(map);
         }
       },
@@ -214,14 +214,91 @@ function getCurrentUserLocation(map){
   });
 }
 
-function troubleshootConnection(map){
-
-}
-
 function connectNewBuilding(map){
-
-
+  navigateToLocation(map);
 }
 
 
 
+
+function navigateToLocation(map){
+  L.control.custom({
+    position: 'topright',
+    content: "< div id='errors' ></div>" +
+    "<div id='directions'>" +
+    "<div id='routes'></div>" +
+    "<div id='instructions'></div>",
+    classes: 'navigation-control'
+  }).addTo(map);
+
+  var drivingLayer = L.mapbox.tileLayer('mapbox.emerald').addTo(map);
+  var walkingLayer = L.mapbox.tileLayer('mapbox.outdoors');
+
+  var directions = L.mapbox.directions();
+
+  var directionsLayer = L.mapbox.directions.layer(directions)
+    .addTo(map);
+
+  var directionsInputControl = L.mapbox.directions.inputControl('inputs', directions)
+    .addTo(map);
+
+  var directionsErrorsControl = L.mapbox.directions.errorsControl('errors', directions)
+    .addTo(map);
+
+  var directionsRoutesControl = L.mapbox.directions.routesControl('routes', directions)
+    .addTo(map);
+
+  var directionsInstructionsControl = L.mapbox.directions.instructionsControl('instructions', directions)
+    .addTo(map);
+
+  directions.on('profile', function (e) {
+    if (e.profile === 'mapbox.driving') {
+      map.addLayer(drivingLayer).removeLayer(walkingLayer);
+    } else {
+      map.addLayer(walkingLayer).removeLayer(drivingLayer);
+    }
+  }).on('load', function () {
+    document.querySelector('#directions').className = 'active';
+
+    var precision = Math.max(0, Math.ceil(Math.log(map.getZoom()) / Math.LN2)),
+      points = [directions.getOrigin()]
+        .concat(directions.getWaypoints())
+        .concat([directions.getDestination()])
+        .map(function (f) {
+          var c = f.geometry.coordinates;
+          return [c[0].toFixed(precision), c[1].toFixed(precision)];
+        });
+
+    history.replaceState({}, null,
+      '?route=' + points.join(';')
+      + '&profile=' + directions.getProfile()
+      + location.hash);
+
+  }).on('unload', function () {
+    document.querySelector('#directions').className = '';
+
+    history.replaceState({}, null, location.pathname + location.hash);
+  });
+
+  var search = window.location.search.substring(1).split('&');
+
+  var profile = (search[1] || '').split('profile=').pop();
+  if (profile) {
+    directions.setProfile(profile);
+  }
+
+  var waypoints = decodeURIComponent(search[0].split('route=').pop()).split(';');
+  if (waypoints.length >= 2) {
+    function toLatLng(waypoint) {
+      return L.latLng(waypoint.split(',').reverse());
+    }
+
+    directions
+      .setOrigin(toLatLng(waypoints[0]))
+      .setDestination(toLatLng(waypoints[waypoints.length - 1]))
+      .setWaypoints(waypoints.slice(1, waypoints.length - 1).map(toLatLng))
+      .query();
+  }
+
+
+}
