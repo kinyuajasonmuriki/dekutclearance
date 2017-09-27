@@ -51,7 +51,7 @@ function constructMapControls(map){
     '    <i class="fa fa-crosshairs"></i>' +
     '</button>' +
     '<button type="button" class="btn btn-info" title="Connect New Building" value="connect">' +
-    '    <i class="fa fa-road" aria-hidden="true"></i>' +
+    '<i class="fa fa-road" aria-hidden="true"></i>' +
     '</button>',
     classes: 'btn-group-vertical btn-group-sm',
     style:
@@ -68,7 +68,7 @@ function constructMapControls(map){
     {
       click: function (data) {
         if (data.target.value == "connect"){
-          connectNewBuilding(map);
+          navigateToLocation(map);
         }
          else if (data.target.value == "geolocate"){
           getCurrentUserLocation(map);
@@ -214,20 +214,13 @@ function getCurrentUserLocation(map){
   });
 }
 
-function connectNewBuilding(map){
-  navigateToLocation(map);
-}
-
-
-
-
 function navigateToLocation(map){
   L.control.custom({
     position: 'topright',
-    content: "< div id='errors' ></div>" +
+    content: 
     "<div id='directions'>" +
     "<div id='routes'></div>" +
-    "<div id='instructions'></div>",
+    "<div id='instructions'></div></div>",
     classes: 'navigation-control'
   }).addTo(map);
 
